@@ -1,0 +1,48 @@
+<mat-card class="invoice-search-card">
+  <h2>Búsqueda de Facturas</h2>
+
+  <!-- Tipo de búsqueda -->
+  <mat-form-field appearance="fill" class="w-100">
+    <mat-label>Tipo de búsqueda</mat-label>
+    <mat-select [(ngModel)]="searchType" (selectionChange)="onSearchTypeChange()">
+      <mat-option value="cliente">Por Cliente</mat-option>
+      <mat-option value="factura">Por Número de Factura</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <!-- Cliente -->
+  <mat-form-field appearance="fill" class="w-100">
+    <mat-label>Cliente</mat-label>
+    <mat-select [(ngModel)]="customerId" [disabled]="searchType !== 'cliente'">
+      <mat-option *ngFor="let c of customers" [value]="c.id">{{ c.businessName }}</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <!-- Número de Factura -->
+  <mat-form-field appearance="fill" class="w-100">
+    <mat-label>Número de Factura</mat-label>
+    <input matInput type="number" [(ngModel)]="invoiceNumber" [disabled]="searchType !== 'factura'" />
+  </mat-form-field>
+
+  <div class="mt-3 mb-4">
+    <button mat-raised-button color="primary" (click)="buscar()">Buscar</button>
+  </div>
+
+
+<table *ngIf="result && result.length > 0" class="result-table mat-elevation-z8">
+    <thead>
+      <tr>
+        <th class="text-center">Número</th>
+        <th class="text-center">Fecha</th>
+        <th class="text-center">Total</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let f of result">
+        <td class="text-center">{{ f.invoiceNumber }}</td>
+        <td class="text-center">{{ f.date | date: 'shortDate' }}</td>
+        <td class="text-center">{{ f.total | currency }}</td>
+      </tr>
+    </tbody>
+  </table>
+</mat-card>

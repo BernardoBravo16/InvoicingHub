@@ -1,0 +1,77 @@
+<mat-card class="invoice-card">
+  <h2>Crear Factura</h2>
+
+  <!-- Cliente -->
+  <mat-form-field appearance="fill" class="full-width">
+    <mat-label>Cliente</mat-label>
+    <mat-select [(ngModel)]="invoice.customerId" name="customerId">
+      <mat-option *ngFor="let customer of customers" [value]="customer.id">
+        {{ customer.businessName }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <!-- Número factura -->
+  <mat-form-field appearance="fill" class="full-width">
+    <mat-label>Número de Factura</mat-label>
+    <input matInput type="number" [(ngModel)]="invoice.invoiceNumber" name="invoiceNumber" />
+  </mat-form-field>
+
+  <!-- Tabla de productos -->
+  <table class="product-table">
+    <thead>
+      <tr>
+        <th>Producto</th>
+        <th>Imagen</th>
+        <th>Precio</th>
+        <th>Cantidad</th>
+        <th>Subtotal</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let detail of invoice.details; let i = index">
+        <td>
+          <mat-form-field appearance="fill">
+           <mat-select [(ngModel)]="detail.productId" name="product{{i}}" (selectionChange)="onProductSelect(detail)">
+          <mat-option *ngFor="let p of products" [value]="p.id">{{ p.name }}</mat-option>
+        </mat-select>
+          </mat-form-field>
+        </td>
+        <td>
+          <img [src]="getProductImage(detail.productId)" width="40" height="40" *ngIf="getProductImage(detail.productId)" />
+        </td>
+        <td>{{ detail.unitPrice | currency }}</td>
+        <td>
+          <input *ngIf="editQuantityIndex === i"
+                 matInput type="number"
+                 [(ngModel)]="detail.quantity"
+                 (blur)="disableEdit()"
+                 name="qty{{i}}"/>
+          <span *ngIf="editQuantityIndex !== i">{{ detail.quantity }}</span>
+        </td>
+        <td>{{ detail.unitPrice * detail.quantity | currency }}</td>
+        <td>
+          <button mat-icon-button color="primary" (click)="enableEdit(i)">
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button mat-icon-button color="warn" (click)="removeDetail(i)">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="actions">
+    <button mat-mini-fab color="primary" (click)="addDetail()">
+      <mat-icon>add</mat-icon>
+    </button>
+  </div>
+
+  <div class="total">
+    <strong>Total: {{ total | currency }}</strong>
+  </div>
+
+  <button mat-flat-button color="accent" (click)="createInvoice()">Crear Factura</button>
+</mat-card>

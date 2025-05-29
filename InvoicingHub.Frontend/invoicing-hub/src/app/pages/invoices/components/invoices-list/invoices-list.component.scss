@@ -1,0 +1,36 @@
+.invoice-search-card {
+  max-width: 600px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background-color: #f8f9fa;
+}
+
+.result-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1.5rem;
+}
+
+.result-table th,
+.result-table td {
+  padding: 0.75rem;
+  border-bottom: 1px solid #ddd;
+  text-align: center;
+}
+
+.w-100 {
+  width: 100%;
+}
+
+.mt-3 {
+  margin-top: 1rem;
+}
+
+.mb-4 {
+  margin-bottom: 1.5rem;
+}
+
+h2 {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
