@@ -1,0 +1,24 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>6119782f-5845-4bf3-8d80-8a1074d5706b</UserSecretsId>
+    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.21.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.6.2" />
+    <PackageReference Include="System.Drawing.Common" Version="8.0.16" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\InvoicingHub.Application\InvoicingHub.Application.csproj" />
+    <ProjectReference Include="..\InvoicingHub.Common\InvoicingHub.Common.csproj" />
+    <ProjectReference Include="..\InvoicingHub.Domain\InvoicingHub.Domain.csproj" />
+    <ProjectReference Include="..\InvoicingHub.Persistence\InvoicingHub.Persistence.csproj" />
+  </ItemGroup>
+
+</Project>

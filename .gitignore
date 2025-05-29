@@ -1,0 +1,28 @@
+# Ignore .NET build folders
+bin/
+obj/
+*.user
+*.suo
+
+# VS Code/Visual Studio settings
+.vscode/
+.vs/
+
+# Ignore node_modules (React project)
+estatehub-web/node_modules/
+estatehub-web/.next/
+estatehub-web/dist/
+
+# Logs and environment
+*.log
+.env
+.env.*
+
+# Output and temporary files
+*.tmp
+*.temp
+*.bak
+
+# OS-generated
+Thumbs.db
+.DS_Store
